@@ -1,4 +1,4 @@
-NAME = polymorphism
+NAME = abstractClass
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -Iinclude
 SRCS_DIR = src

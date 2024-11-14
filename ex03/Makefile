@@ -1,4 +1,4 @@
-NAME = polymorphism
+NAME = interfaceRecap
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -Iinclude
 SRCS_DIR = src

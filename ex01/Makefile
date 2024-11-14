@@ -1,7 +1,9 @@
 NAME = worldOnFire
 CXX = c++
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SRCS = main.cpp animal.cpp dog.cpp cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -Iinclude
+SRCS_DIR = src
+INCL_DIR = include
+SRCS = $(wildcard $(SRCS_DIR)/*.cpp)
 OBJS = $(SRCS:.cpp=.o)
 
 $(NAME): $(OBJS)

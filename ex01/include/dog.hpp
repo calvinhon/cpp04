@@ -13,7 +13,9 @@ public:
     Dog& operator=(const Dog& src);
     ~Dog();
 
-    void    makeSound() const;
+    void        makeSound() const;
+    std::string getIdea(size_t i) const;
+    void        setIdea(size_t i, std::string idea);
 
 private:
     Brain*  _brain;
