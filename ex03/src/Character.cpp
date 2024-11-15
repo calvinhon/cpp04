@@ -17,6 +17,7 @@ Character::Character(std::string name): _name(name) {
 }
 
 Character::Character(const Character& src) {
+    _name = src._name;
     for (int i = 0; i < 4; i++)
         if (this->_inventory[i])
             delete _inventory[i];
@@ -25,6 +26,16 @@ Character::Character(const Character& src) {
             this->_inventory[i] = src._inventory[i]->clone();
         else
             this->_inventory[i] = NULL;
+    }
+    this->_head = new _unequipped_inv;
+    this->_head->m = 0;
+    this->_head->next = NULL;
+    _unequipped_inv* _src_cur = src._head;
+    _unequipped_inv* _this_cur = this->_head;
+    while (_src_cur) {
+        _this_cur->m = _src_cur.m->clone();
+        _src_cur = _src_cur->next;
+
     }
 }
 
@@ -49,6 +60,7 @@ Character::~Character() {
             delete _inventory[i];
     while (_head) {
         _unequipped_inv* tmp = _head->next;
+        delete _head->m;
         delete _head;
         _head = tmp;
     }
@@ -75,25 +87,22 @@ void Character::equip(AMateria* m) {
 void Character::unequip(int idx) {
     if (idx > -1 && idx < 4) {
         if (_inventory[idx]) {
-            while (_head->m)
-                _head->m = _inventory[idx];
-            else {
-                // _unequipped_inv* cur = _head;
-                while (_head->next)
-                    _head = _head->next;
-                _head->next = new _unequipped_inv;
-                _head = _head->next;
-                _head->m = _inventory[idx];
-                _head->next = NULL;
-            }
-            _inventory[idx] = NULL;
             std::cout << getName() << " unequipped slot " << idx << ": " << _inventory[idx]->getType() << std::endl;
+            _unequipped_inv* _cur = _head; 
+            while (_cur->m)
+                _cur = _cur->next;
+            _cur->m = _inventory[idx];
+            _cur->next = new _unequipped_inv;
+            _cur = _cur->next;
+            _cur->m = 0;
+            _cur->next = NULL;
+            _inventory[idx] = NULL;
         }
         else
             std::cout << "No materia in slot " << idx << "for" << getName() << " to unequip" << std::endl;
     }
     if (idx < 0 || idx > 3)
-        std::cout << "Can't unequip, inventory has max 4 items" << std::endl;
+        std::cout << "Invalid slot " << idx << " for " << getName() << " to unequip" << std::endl;
 }
 
 void Character::use(int idx, ICharacter& target) {
@@ -105,4 +114,8 @@ void Character::use(int idx, ICharacter& target) {
     }
     else
         std::cout << "Invalid slot " << idx << " for " << getName() << " to use" << std::endl;
+}
+
+_unequipped_inv*    addNode() {
+    _unequipped_inv*    node = new 
 }

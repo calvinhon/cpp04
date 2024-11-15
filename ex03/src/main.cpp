@@ -26,6 +26,9 @@ int main(void) {
     std::cout << std::endl;
 
     std::cout << "=========== Additional Test ===========" << std::endl;
+    std::cout << std::endl;
+    
+    std::cout << "< me >" << std::endl;
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());
     src->learnMateria(new Cure());
@@ -41,17 +44,29 @@ int main(void) {
     me->use(2, *bob);
     me->use(3, *bob);
     me->unequip(0);
-
+    me->unequip(1);
+    me->unequip(2);
+    me->unequip(3);
+    me->unequip(4);
+    me->use(0, *bob);
+    std::cout << std::endl;
+    
+    std::cout << "< Cloud >" << std::endl;
     Character Cloud("Cloud");
-    Cloud.use(0, *bob);
+    Cloud.use(0, *me);
     tmp = src->createMateria("cure");
     Cloud.equip(tmp);
-    Cloud.use(0, *bob);
+    Cloud.use(0, *me);
+    std::cout << std::endl;
 
-    Character Sephiroth("Sephiroth");
-    Sephiroth = Cloud;
-    Sephiroth.use(0, *bob);
-    Sephiroth.use(1, *bob);
+    std::cout << "< Sephiroth >" << std::endl;
+    Character Sephiroth(Cloud);
+    Sephiroth.use(0, Cloud);
+    Sephiroth.use(1, Cloud);
+    tmp = src->createMateria("ice");
+    Sephiroth.equip(tmp);
+    Sephiroth.use(1, Cloud);
+    Sephiroth.unequip(1);
 
     delete bob;
     delete me;

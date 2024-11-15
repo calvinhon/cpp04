@@ -8,6 +8,8 @@ struct  _unequipped_inv {
     _unequipped_inv*    next;
 };
 
+_unequipped_inv*    addNode();
+
 class   Character: public ICharacter {
 
 public:
