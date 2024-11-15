@@ -38,15 +38,16 @@ int main(void) {
     me->equip(tmp);
     tmp = src->createMateria("ice");
     me->equip(tmp);
-    tmp = src->createMateria("cure");
     me->equip(tmp);
     me->equip(tmp);
     me->use(2, *bob);
     me->use(3, *bob);
-    me->unequip(0);
     me->unequip(1);
+    tmp = src->createMateria("ice");
+    me->equip(tmp);
     me->unequip(2);
     me->unequip(3);
+    me->unequip(0);
     me->unequip(4);
     me->use(0, *bob);
     std::cout << std::endl;
@@ -60,7 +61,8 @@ int main(void) {
     std::cout << std::endl;
 
     std::cout << "< Sephiroth >" << std::endl;
-    Character Sephiroth(Cloud);
+    Character Sephiroth("Sephiroth");
+	Sephiroth = Cloud;
     Sephiroth.use(0, Cloud);
     Sephiroth.use(1, Cloud);
     tmp = src->createMateria("ice");

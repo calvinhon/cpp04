@@ -22,6 +22,5 @@ std::string const&  AMateria::getType() const {
 }
 
 void AMateria::use(ICharacter& target) {
-    std::string target_name = target.getName();
-    std::cout << "Nothing happens to " << target_name << std::endl;
+    std::cout << "* nothing happens to " << target.getName() << " *" << std::endl;
 }
